@@ -12,7 +12,16 @@ const JWT_SECRET = "your-secret-key";
 
 
 app.use(express.json({ limit: '50mb' }));
-app.use(cors());
+const corsOptions = {
+  origin: '*',
+  credentials: true,
+  'allowedHeaders': ['sessionId', 'Content-Type'],
+  'exposedHeaders': ['sessionId'],
+  'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  'preflightContinue': false
+}
+app.use(cors(corsOptions));
+
 
 mongoose
   .connect("mongodb+srv://mern:Passer123@cluster0.u803d.mongodb.net/employee", {
