@@ -11,7 +11,22 @@ const Centrer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #1a1a1a;
+ background: rgba(73, 76, 79, 1);
+  position: relative; 
+
+  ::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+  
+    background-image: url('bg.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.9; /* Ajustez l'opacité selon vos préférences */
+    z-index: -1; /* Place l'image derrière le contenu de Centrer */
+  }
 `;
 
 const FormContainer = styled.form`
@@ -20,14 +35,26 @@ const FormContainer = styled.form`
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   max-width: 400px;
-  width: 100%;
+  width: 384px;
+
+top: 146px;
+left: 768px;
+gap: 0px;
+opacity: 0px;
+
 `;
 
 const FormTitle = styled.h2`
   color: black;
-  text-align: center;
+  
   margin-bottom: 20px;
-  font-size: 16px;
+  
+  font-family: Roboto;
+font-size: 17.07px;
+font-weight: 400;
+line-height: 25.6px;
+text-align: left;
+
 `;
 
 const Container = styled.div`
@@ -40,19 +67,22 @@ const Input = styled.input.withConfig({
 })`
   padding: 10px;
   margin-bottom: ${(props) => (props.hasError ? '5px' : '20px')};
-  border: 2px solid ${(props) => (props.hasError ? '#ff4444' : 'transparent')};
-  border-radius: 4px;
+  border:none;
   font-size: 16px;
-
-  &:focus {
-    outline: none;
-    border-color: ${(props) => (props.hasError ? '#ff4444' : '#FFD964')};
-  }
+  border-bottom: 1.33px solid #A0A0A033;
 `;
 
 const Label = styled.label`
-  color: black;
-  margin-bottom: 5px;
+  color: rgba(0, 0, 0, 0.87);
+
+
+  
+  font-family: Roboto;
+font-size: 15.87px;
+font-weight: 400;
+line-height: 23.8px;
+text-align: left;
+
 `;
 
 const CheckboxContainer = styled.div.withConfig({
@@ -65,8 +95,10 @@ const CheckboxContainer = styled.div.withConfig({
   color: black;
 `;
 const Boutton = styled.button`
-  background-color: #FFD964;
-  color: black;
+
+  color: white;
+  background: rgba(71, 74, 77, 1);
+
   border: none;
   border-radius: 4px;
   padding: 10px;
@@ -75,7 +107,7 @@ const Boutton = styled.button`
   opacity: ${props => props.disabled ? 0.7 : 1};
 
   &:hover {
-    background-color: ${props => props.disabled ? '#FFD964' : '#ffcc33'};
+    background: rgba(71, 74, 70, 1);
   }
 `;
 
@@ -98,7 +130,16 @@ const AlertContainer = styled.div`
   margin-bottom: 20px;
   text-align: center;
 `;
+const Title = styled.h1`
+  padding: 10px;
+  color: white;
+  font-family: Roboto;
+font-size: 26.66px;
+font-weight: 700;
+line-height: 21.33px;
+text-align: left;
 
+`;
 
 const baseURL = process.env.NEXT_PUBLIC_BACKEND_BASEURL;
 export const Inscription = () => {
@@ -192,8 +233,8 @@ export const Inscription = () => {
 
   return (
     <Centrer>
-       <div style={{ display: 'flex',flexDirection:'column',alignItems:'center' ,justifyContent:'center' }}>
-        <div style={{ display: 'flex',alignItems:'center' }}>
+       <div style={{ display: 'flex',flexDirection:'column',alignItems:'center' ,justifyContent:'center',}}>
+        <div style={{ display: 'flex',alignItems:'center',marginBottom: '25px' }}>
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M2.66602 2.66624H29.3286V29.3288L2.66602 2.66624Z" fill="white"/>
 <path d="M2.66602 2.66624H22.663L15.9973 15.9975L2.66602 2.66624Z" fill="black" fillOpacity="0.15"/>
@@ -201,7 +242,7 @@ export const Inscription = () => {
 </svg>
 
 
-        <h1 style={{ padding: '10px', color: 'white' }}>RED PRODUCT</h1>
+      <Title>RED PRODUCT</Title>  
         </div>
         <FormContainer onSubmit={handleSubmit}>
           <FormTitle>Inscrivez-vous en tant qu'Admin</FormTitle>
@@ -218,7 +259,7 @@ export const Inscription = () => {
               type='text'
               id="name"
               name="name"
-              placeholder="Nom"
+             
               value={formData.name}
               onChange={handleChange}
               hasError={!!errors.name}
@@ -231,7 +272,7 @@ export const Inscription = () => {
               type='email'
               id="email"
               name="email"
-              placeholder="Email"
+              
               value={formData.email}
               onChange={handleChange}
               hasError={!!errors.email}
@@ -244,7 +285,7 @@ export const Inscription = () => {
               type='password'
               id="password"
               name="password"
-              placeholder="Mot de passe"
+             
               value={formData.password}
               onChange={handleChange}
               hasError={!!errors.password}
@@ -264,7 +305,7 @@ export const Inscription = () => {
             </CheckboxContainer>
             {errors.acceptTerms && <ErrorText>{errors.acceptTerms}</ErrorText>}
 
-            <Boutton type="submit" disabled={loading}>
+            <Boutton type="submit" disabled={loading }>
               {loading ? 'Inscription en cours...' : 'S\'inscrire'}
             </Boutton>
           </Container>

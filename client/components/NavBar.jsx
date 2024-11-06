@@ -3,6 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Search, Bell, LogOut, User } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 const NavContainer = styled.nav`
   display: flex;
@@ -110,6 +111,18 @@ const LogoutButton = styled.div`
 `;
 
 export const NavBar = ({ name }) => {
+
+  const router = useRouter();
+  const handleLogout = () => {
+    
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');  
+    router.push('/connection');
+    
+  };
+
+
+
   return (
     <NavContainer>
       <LeftSection>
@@ -132,7 +145,7 @@ export const NavBar = ({ name }) => {
             <User size={24} color="#666" />
           </ProfileImage>
 
-          <LogoutButton>
+          <LogoutButton onClick={handleLogout}>
             <LogOut size={18} />
             
           </LogoutButton>
